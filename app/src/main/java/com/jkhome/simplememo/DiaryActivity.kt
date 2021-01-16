@@ -1,7 +1,10 @@
 package com.jkhome.simplememo
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jkhome.simplememo.databinding.ActivityDiaryBinding
 
@@ -24,5 +27,13 @@ class DiaryActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = linearLayoutManager
         adapter = DiaryAdapter(diaryList)
         binding.recyclerView.adapter = adapter
+
+
+    }
+
+    fun createNewDiary(view: View){
+        val intent = Intent(this, NewDiary::class.java)
+        startActivity(intent)
+
     }
 }
