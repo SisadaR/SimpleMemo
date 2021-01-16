@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.jkhome.simplememo.data.Diary
 
 class DiaryAdapter (private var diaryList: MutableList<Diary>) : RecyclerView.Adapter<DiaryAdapter.DiaryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryAdapter.DiaryViewHolder {
@@ -41,7 +42,7 @@ class DiaryAdapter (private var diaryList: MutableList<Diary>) : RecyclerView.Ad
             view.setOnClickListener(this)
         }
 
-        fun bindDiary(diary:Diary)
+        fun bindDiary(diary: Diary)
         {
             this.diary = diary
             date.text = diary.date
