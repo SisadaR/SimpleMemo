@@ -40,6 +40,7 @@ class NewDiary : AppCompatActivity() {
 
     }
 
+
     private fun readDiary(id: Int) {
         val mDBHelper = DiaryDBHelper(this)
         val db = mDBHelper.readableDatabase
@@ -82,7 +83,7 @@ class NewDiary : AppCompatActivity() {
                 if(id == 0)
                     insertDiary()
                 else
-                    updateDiary()
+                    updateDiary(id)
 
                 finish()
                 true
@@ -91,14 +92,29 @@ class NewDiary : AppCompatActivity() {
         }
     }
 
-    private fun updateDiary() {
+    override fun onStop() {
+        super.onStop()
+        if(id == 0)
+            insertDiary()
+        else
+            updateDiary(id)
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(id == 0)
+            insertDiary()
+        else
+            updateDiary(id)
+    }
+
+    private fun updateDiary(id: Int) {
         val mDBHelper = DiaryDBHelper(this)
         val db = mDBHelper.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TITLE,findViewById<EditText>(R.id.title_diary).text.toString())
             put(COLUMN_DIARY, findViewById<EditText>(R.id.diary_text).text.toString())
         }
-        db.update(TABLE_NAME,values,"$_ID = $id")
+        db.update(TABLE_NAME,values,"$_ID = $id",null)
     }
 
     private fun insertDiary() {
