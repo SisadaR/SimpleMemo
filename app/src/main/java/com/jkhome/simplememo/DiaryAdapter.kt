@@ -1,5 +1,6 @@
 package com.jkhome.simplememo
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,13 @@ class DiaryAdapter (private var diaryList: MutableList<Diary>) : RecyclerView.Ad
         private lateinit var  diary: Diary
         private var date: TextView
         private var title:TextView
+
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+            val context = itemView.context
+            val intent = Intent(context, NewDiary::class.java)
+            intent.putExtra("rowId", diary.id)
+            context.startActivity(intent)
+
         }
 
         init {
